@@ -1,0 +1,19 @@
+# This file was created for <%= node.name %>
+# by Chef
+# Manual changes will be lost
+input {
+  <%= node['logstash']['agent']['inputs'] %>
+}
+
+<% unless node['logstash']['agent']['filters'].empty? -%>
+filter {
+  <%= node['logstash']['agent']['filters'] %>
+}
+<% end -%>
+
+output {
+  <% if node['logstash']['agent']['debug'] -%>
+  stdout { }
+  <% end -%>
+  <%= node['logstash']['agent']['outputs'] %>
+}
